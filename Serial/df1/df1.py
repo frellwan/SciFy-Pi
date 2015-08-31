@@ -218,18 +218,15 @@ class DF1ClientProtocol(SerialClientProtocol):
             # TODO: Add code to load values to PLC
             if (not self.loaded):
                 serialLog.debug("Loading Values to PLC")
-                print "Load values to PLC"
                 self.loaded = True
 
                 def clearRecipeBit(response):
-                    print 'clear bit'
                     request = protectedBitWriteRequest(1, self.ALARMS[1], [0])
                     d = self.sendRequest(request)
                     d.addErrback(self.errorHandler, 'clearRecipeBit')
 
 
                 def sendRecipe(recipe):
-                    print recipe
                     PLCRecipe = self.config.getPLCRecipe()
 
                     result = self.mtrimSerial.writeParameter(1, 1, float(recipe[-3]))
@@ -259,7 +256,6 @@ class DF1ClientProtocol(SerialClientProtocol):
                     for recipe in fObj:
                         if recipe.strip() in recipeName[0]:
                             recipeFile = localDir + '/' + recipe.strip() + '.csv'
-                            print recipeFile
                             fRecipe = open(recipeFile, 'r')
                             for line in fRecipe:
                                 if recipeName[0] in line.strip():
@@ -411,7 +407,7 @@ def main():
     RS422port, RS422baud = config.getRS422parms()    
     mtrim = SerialMTrimClient(mtrimfactory, RS422port, reactor, baudrate = RS422baud)
     
-    factory = DF1Factory(oeeLog, ftpEndpoint, mtrim)
+    factory = DF1Factory(oeeLog, ftpEndpoint, mtrim.protocol)
     RS232port, RS232baud = config.getRS232parms()    
     SerialDF1Client(factory, RS232port, reactor, baudrate = RS232baud)
 
