@@ -393,7 +393,6 @@ def main():
 
     config = utilities.optionReader()
 
-    print config.getFTPDirectories()
     localDir, remoteDir = config.getFTPDirectories()
     oeeLog = LoggingLineWriter(localDir)
     
