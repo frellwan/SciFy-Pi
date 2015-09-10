@@ -31,7 +31,7 @@ class FTPClientA(FTPClient):
         the ability to append data to a file.
 
     ************************************************************** """
-    def __init__(self, factory, username = 'anonymous', password = 'anonymous@', passive = 1):
+    def __init__(self, factory, username = 'anonymous', password = 'anonymous@', passive = 0):
         FTPClient.__init__(self, username, password, passive)
         self.factory = factory
         self.debug = True
