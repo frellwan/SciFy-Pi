@@ -190,6 +190,7 @@ class SerialClientProtocol(protocol.Protocol, TimeoutMixin):
     def errorHandler(self, error, msg=''):
         stringMsg = msg + ': Failed.  Error was: ', error.value
         _logger.debug(stringMsg)
+        self.lock.release()
         #sendEmail('4137@commscope.com', 'erice@commscope.com', stringMsg, 'RPi SerialMaster Error')
 
 
