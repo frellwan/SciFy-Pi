@@ -179,8 +179,8 @@ class DF1ClientProtocol(SerialClientProtocol):
         self.resetTimeout()
         self.ENQCount = 0
         self.NAKCount = 0
-        self.setTimeout(None)
-        self.deffered = None
+        #self.setTimeout(None)
+        #self.deffered = None
         
         return packet.records
 
